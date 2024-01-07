@@ -116,7 +116,8 @@ public class GitInfo {
                 } else {
                     File refsDir = gitDir.resolve("refs").toFile();
                     if (refsDir.exists()) {
-                        String foundRefs = Arrays.stream(Objects.requireNonNull(refsDir.listFiles())).map(File::getName).collect(Collectors.joining("\n"));
+                        File[] files = Objects.requireNonNull(refsDir.listFiles());
+                        String foundRefs = Arrays.stream(files).map(File::getName).collect(Collectors.joining("\n"));
                         Logging.getLogger(GitInfo.class).error("Found git refs\n" + foundRefs);
                     } else {
                         Logging.getLogger(GitInfo.class).error("No git refs dir found");
